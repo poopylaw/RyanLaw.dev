@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --font-grotesk: "Space Grotesk", "Archivo", system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #0A0A0B;
+  color: #F2F2F0;
+  font-family: var(--font-grotesk);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Hide native cursor only on fine-pointer (mouse/trackpad) devices,
+   and only once our custom cursor has mounted (see body.cursor-ready) */
+@media (pointer: fine) {
+  body.cursor-ready,
+  body.cursor-ready a,
+  body.cursor-ready button,
+  body.cursor-ready [role="button"] {
+    cursor: none;
+  }
+}
+
+::selection {
+  background: #3ED9E8;
+  color: #0A0A0B;
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Visible keyboard focus ring, drafting-tool style */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid #3ED9E8;
+  outline-offset: 3px;
+}
+
+/* Utility: technical tick marks on section edges */
+.tick-border {
+  position: relative;
+}
+
+.tick-border::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 1px;
+  background: repeating-linear-gradient(
+    to right,
+    rgba(242, 242, 240, 0.25) 0,
+    rgba(242, 242, 240, 0.25) 1px,
+    transparent 1px,
+    transparent 8px
+  );
+}
+
+@keyframes blink-caret {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.caret {
+  animation: blink-caret 1s step-end infinite;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: var(--twinkle-base, 0.5); }
+  50% { opacity: 1; }
+}
+
+.twinkle {
+  animation: twinkle 3.5s ease-in-out infinite;
+}
